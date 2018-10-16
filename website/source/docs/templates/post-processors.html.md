@@ -82,7 +82,8 @@ sequence definition. Sequence definitions are used to chain together multiple
 post-processors. An example is shown below, where the artifact of a build is
 compressed then uploaded, but the compressed result is not kept.
 
-It is very important that any post processors that need to be run in order, be sequenced!
+Post processors that must be run in a certain order must appear in a sequence
+definition.
 
 ``` json
 {
@@ -95,19 +96,17 @@ It is very important that any post processors that need to be run in order, be s
 }
 ```
 
-As you may be able to imagine, the **simple** and **detailed** definitions are
-simply shortcuts for a **sequence** definition of only one element.
+The **simple** and **detailed** definitions are simply shortcuts for a
+**sequence** definition of only one element.
 
 ## Input Artifacts
 
-When using post-processors, the input artifact (coming from a builder or another
-post-processor) is discarded by default after the post-processor runs. This is
-because generally, you don't want the intermediary artifacts on the way to the
-final artifact created.
+By default, the post-processor input artifact from a builder or another
+post-processor is discarded after the post-processor runs. This is because
+ordinarily you want only the final artifact.
 
-In some cases, however, you may want to keep the intermediary artifacts. You can
-tell Packer to keep these artifacts by setting the `keep_input_artifact`
-configuration to `true`. An example is shown below:
+To retain the input artifact, set `keep_input_artifact` to `true` as shown in the
+example below:
 
 ``` json
 {
@@ -125,7 +124,7 @@ post-processor. If you're specifying a sequence of post-processors, then all
 intermediaries are discarded by default except for the input artifacts to
 post-processors that explicitly state to keep the input artifact.
 
--&gt; **Note:** The intuitive reader may be wondering what happens if multiple
+-&gt; **Note:** The alert reader may wonder what happens if multiple
 post-processors are specified (not in a sequence). Does Packer require the
 configuration to keep the input artifact on all the post-processors? The answer
 is no, of course not. Packer is smart enough to figure out that at least one
