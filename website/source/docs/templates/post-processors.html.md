@@ -15,8 +15,8 @@ will be done to images built by the builders. Examples of post-processing would
 be compressing files, uploading artifacts, etc.
 
 Post-processors are *optional*. If no post-processors are defined within a
-template, then no post-processing will be done to the image. The resulting
-artifact of a build is just the image outputted by the builder.
+template, then no post-processing will be done to the image. The build result
+is merely the image created by the builder.
 
 This documentation page will cover how to configure a post-processor in a
 template. The specific configuration options available for each post-processor,
